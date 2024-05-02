@@ -1,33 +1,147 @@
 const express = require("express");
+const axios = require("axios");
+
 const app = express();
+const PORT = process.env.PORT || 3000;
 
-let people = [
-  {
-    name: "Hannah Rickard",
-    number: "06-51-99-56-83",
-    id: 1,
-  },
-  {
-    name: "Hyun Namkoong",
-    number: "10987654",
-    id: 2,
-  },
-  {
-    name: "Courtney Martinez",
-    number: "3691215",
-    id: 3,
-  },
-];
-
-app.get("/", (request, response) => {
-  response.send("<h1>Phonebook</h1>");
+// Search meal by name
+app.get("/search", async (req, res) => {
+  const { s } = req.query;
+  try {
+    const response = await axios.get(
+      `https://www.themealdb.com/api/json/v1/1/search.php?s=${s}`
+    );
+    res.json(response.data);
+  } catch (error) {
+    res.status(500).json({ error: "Internal Server Error" });
+  }
 });
 
-app.get("/api/people", (request, response) => {
-  response.json(people);
+// List all meals by first letter
+app.get("/mealsByFirstLetter", async (req, res) => {
+  const { f } = req.query;
+  try {
+    const response = await axios.get(
+      `https://www.themealdb.com/api/json/v1/1/search.php?f=${f}`
+    );
+    res.json(response.data);
+  } catch (error) {
+    res.status(500).json({ error: "Internal Server Error" });
+  }
 });
 
-const PORT = 3001;
+// Lookup full meal details by id
+app.get("/mealDetails/:id", async (req, res) => {
+  const { id } = req.params;
+  try {
+    const response = await axios.get(
+      `https://www.themealdb.com/api/json/v1/1/lookup.php?i=${id}`
+    );
+    res.json(response.data);
+  } catch (error) {
+    res.status(500).json({ error: "Internal Server Error" });
+  }
+});
+
+// Lookup a single random meal
+app.get("/randomMeal", async (req, res) => {
+  try {
+    const response = await axios.get(
+      "https://www.themealdb.com/api/json/v1/1/random.php"
+    );
+    res.json(response.data);
+  } catch (error) {
+    res.status(500).json({ error: "Internal Server Error" });
+  }
+});
+
+// List all meal categories
+app.get("/mealCategories", async (req, res) => {
+  try {
+    const response = await axios.get(
+      "https://www.themealdb.com/api/json/v1/1/categories.php"
+    );
+    res.json(response.data);
+  } catch (error) {
+    res.status(500).json({ error: "Internal Server Error" });
+  }
+});
+
+// List all Categories
+app.get("/categories", async (req, res) => {
+  try {
+    const response = await axios.get(
+      "https://www.themealdb.com/api/json/v1/1/list.php?c=list"
+    );
+    res.json(response.data);
+  } catch (error) {
+    res.status(500).json({ error: "Internal Server Error" });
+  }
+});
+
+// List all Areas
+app.get("/areas", async (req, res) => {
+  try {
+    const response = await axios.get(
+      "https://www.themealdb.com/api/json/v1/1/list.php?a=list"
+    );
+    res.json(response.data);
+  } catch (error) {
+    res.status(500).json({ error: "Internal Server Error" });
+  }
+});
+
+// List all Ingredients
+app.get("/ingredients", async (req, res) => {
+  try {
+    const response = await axios.get(
+      "https://www.themealdb.com/api/json/v1/1/list.php?i=list"
+    );
+    res.json(response.data);
+  } catch (error) {
+    res.status(500).json({ error: "Internal Server Error" });
+  }
+});
+
+// Filter by main ingredient
+app.get("/filterByIngredient/:ingredient", async (req, res) => {
+  const { ingredient } = req.params;
+  try {
+    const response = await axios.get(
+      `https://www.themealdb.com/api/json/v1/1/filter.php?i=${ingredient}`
+    );
+    res.json(response.data);
+  } catch (error) {
+    res.status(500).json({ error: "Internal Server Error" });
+  }
+});
+
+// Filter by Category
+app.get("/filterByCategory/:category", async (req, res) => {
+  const { category } = req.params;
+  try {
+    const response = await axios.get(
+      `https://www.themealdb.com/api/json/v1/1/filter.php?c=${category}`
+    );
+    res.json(response.data);
+  } catch (error) {
+    res.status(500).json({ error: "Internal Server Error" });
+  }
+});
+
+// Filter by Area
+app.get("/filterByArea/:area", async (req, res) => {
+  const { area } = req.params;
+  try {
+    const response = await axios.get(
+      `https://www.themealdb.com/api/json/v1/1/filter.php?a=${area}`
+    );
+    res.json(response.data);
+  } catch (error) {
+    res.status(500).json({ error: "Internal Server Error" });
+  }
+});
+
 app.listen(PORT, () => {
-  console.log(`Server running on port ${PORT}`);
+  console.log(`Server is running on port ${PORT}`);
 });
