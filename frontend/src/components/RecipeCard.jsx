@@ -1,5 +1,6 @@
 /* eslint-disable react/prop-types */
 import React from "react";
+import { Link } from "react-router-dom";
 
 function RecipeCard({ meal }) {
   const computeIngredient = () => {
@@ -44,8 +45,8 @@ function RecipeCard({ meal }) {
         <p className="mb-3 font-normal text-gray-700 dark:text-gray-400 line-clamp-3">
           {meal.strInstructions}
         </p>
-        <a
-          href="#"
+        <Link
+          to="/mealinfo"
           className="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white bg-yellow-700 rounded-lg hover:bg-yellow-800 focus:ring-4 focus:outline-none focus:ring-yellow-300 dark:bg-yellow-600 dark:hover:bg-yellow-700 dark:focus:ring-yellow-800"
         >
           Read more
@@ -64,7 +65,7 @@ function RecipeCard({ meal }) {
               d="M1 5h12m0 0L9 1m4 4L9 9"
             />
           </svg>
-        </a>
+        </Link>
       </div>
     </div>
   );

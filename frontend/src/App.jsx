@@ -13,7 +13,7 @@ import {
   Footer,
 } from "./components";
 
-import { Home, About, FavoriteMeals } from "./pages";
+import { Home, About, FavoriteMeals, MealInfo } from "./pages";
 
 function App() {
   return (
@@ -24,6 +24,7 @@ function App() {
           <Route path="/" element={<Home />} />
           <Route path="/about" element={<About />} />
           <Route path="/favorites" element={<FavoriteMeals />} />
+          <Route path="/mealinfo" element={<MealInfo />} />
         </Routes>
       </div>
     </Router>

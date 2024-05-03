@@ -12,6 +12,7 @@ import {
 } from "../components";
 const Home = () => {
   const [meals, setMeals] = useState(null);
+  const [suggestMeals, setSuggestMeals] = useState(null);
   const [selectedRecipe, setSelectedRecipe] = useState(null);
   const BaseURL = "http://localhost:3000";
 
@@ -20,6 +21,14 @@ const Home = () => {
       .then((response) => response.json())
       .catch((error) => console.log(error));
     setMeals(data.meals);
+  };
+
+  const onSearchFirstLetter = async (query) => {
+    query = query[0];
+    const data = await fetch(`${BaseURL}/mealsByFirstLetter?f=${query}`)
+      .then((response) => response.json())
+      .catch((error) => console.log(error));
+    setSuggestMeals(data.meals);
   };
 
   useEffect(() => {
@@ -34,11 +43,15 @@ const Home = () => {
       }}
       className="h-[90vh] "
     >
-      <SearchBar onSearch={onSearch}></SearchBar>
+      <SearchBar
+        onSearch={onSearch}
+        suggestMeals={suggestMeals}
+        onSearchFirstLetter={onSearchFirstLetter}
+      ></SearchBar>
       <CategoriesList></CategoriesList>
       <RecipeList meals={meals}></RecipeList>
       {selectedRecipe && <RecipeDetails recipe={selectedRecipe} />}
-      {/* <Footer></Footer> */}
+      <Footer></Footer>
     </div>
   );
 };

@@ -4,7 +4,7 @@ import RecipeCard from "./RecipeCard";
 
 function RecipeList({ meals }) {
   return (
-    <div className="grid place-items-center">
+    <div className="grid place-items-center min-h-[70vh]">
       <div className="flex flex-wrap -mx-4 max-w-screen-xl">
         {meals ? (
           meals.map((meal) => (
