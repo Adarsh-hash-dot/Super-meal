@@ -4,6 +4,7 @@ import { useParams, Link } from "react-router-dom";
 
 function MealInfoPage() {
   const [mealData, setMealData] = useState(null);
+  const [favorites, setFavorites] = useState({});
   const BASE_URL = "http://localhost:3000";
   const { id } = useParams();
 
@@ -36,15 +37,49 @@ function MealInfoPage() {
     return ingredients;
   };
 
+  // Function to handle toggling favorite status of a recipe
+  const toggleFavorite = (mealID, data) => {
+    let favorites = localStorage.getItem("favorites");
+    if (!favorites) {
+      localStorage.setItem("favorites", JSON.stringify({}));
+      favorites = {};
+    } else {
+      favorites = JSON.parse(localStorage.getItem("favorites"));
+    }
+    console.log("wo");
+    if (favorites[mealID]) {
+      favorites[mealID] = null;
+    } else {
+      favorites[mealID] = mealData;
+    }
+    localStorage.setItem("favorites", JSON.stringify(favorites));
+    loadFavorites();
+  };
+  const loadFavorites = () => {
+    let favoriteLocalStorage = localStorage.getItem("favorites");
+    if (favoriteLocalStorage) {
+      setFavorites(JSON.parse(favoriteLocalStorage));
+    }
+  };
+
   useEffect(() => {
     fetchDetails();
+    loadFavorites();
   }, []);
 
   return (
     <div className="grid place-items-center">
       {mealData ? (
         <div className="max-w-4xl mx-auto px-4 py-8">
-          <h2 className="text-3xl font-bold mb-4">{mealData.strMeal}</h2>
+          <h2 className="text-3xl font-bold mb-4 flex flex-wrap justify-between">
+            <span>{mealData.strMeal}</span>{" "}
+            <span
+              className="cursor-pointer"
+              onClick={() => toggleFavorite(mealData.idMeal, mealData)}
+            >
+              {favorites[mealData.idMeal] == null ? "🤍" : "❤️"}
+            </span>
+          </h2>
           <ResponsiveYouTubeEmbed youtubeUrl={mealData.strYoutube} />
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
             {/* Meal image */}

@@ -138,6 +138,16 @@ function Header() {
               </li>
               <li>
                 <NavLink
+                  to="/filters"
+                  className={({ isActive }) =>
+                    isActive ? activeLinkClass : inActiveLinkClass
+                  }
+                >
+                  Filters
+                </NavLink>
+              </li>
+              <li>
+                <NavLink
                   to="/favorites"
                   className={({ isActive }) =>
                     isActive ? activeLinkClass : inActiveLinkClass

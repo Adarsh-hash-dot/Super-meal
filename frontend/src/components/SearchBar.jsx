@@ -34,7 +34,7 @@ function SearchBar({ onSearch, onSearchFirstLetter, suggestMeals }) {
   };
 
   return (
-    <div className="pt-10 ">
+    <div className="pt-10 pb-10">
       <form
         className="max-w-md mx-auto relative"
         onSubmit={(e) => handleSubmit(e)}

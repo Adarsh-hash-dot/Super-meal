@@ -2,17 +2,21 @@
 import React from "react";
 import RecipeCard from "./RecipeCard";
 
-function RecipeList({ meals }) {
+function RecipeList({ meals, loadFavorites, favorites }) {
   return (
     <div className="grid place-items-center min-h-[70vh]">
-      <div className="flex flex-wrap -mx-4 max-w-screen-xl">
+      <div className="flex flex-wrap justify-around max-w-screen-xl">
         {meals ? (
           meals.map((meal) => (
             <div
               key={meal.idMeal}
-              className="w-full sm:w-1/2 md:w-1/3 lg:w-1/4 xl:w-1/4 px-4 mb-4 grid place-items-center"
+              className="w-full sm:w-1/2 md:w-1/3 lg:w-1/4 xl:w-1/4 pr-4 mb-4 grid place-items-center"
             >
-              <RecipeCard meal={meal} />
+              <RecipeCard
+                meal={meal}
+                loadFavorites={loadFavorites}
+                favorites={favorites}
+              />
             </div>
           ))
         ) : (

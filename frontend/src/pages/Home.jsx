@@ -3,7 +3,6 @@ import {
   FavoriteRecipes,
   FilterOptions,
   Header,
-  RecipeDetails,
   RecipeList,
   SearchBar,
   ShoppingList,
@@ -13,7 +12,7 @@ import {
 const Home = () => {
   const [meals, setMeals] = useState(null);
   const [suggestMeals, setSuggestMeals] = useState(null);
-  const [selectedRecipe, setSelectedRecipe] = useState(null);
+  const [favorites, setFavorites] = useState({});
   const BaseURL = "http://localhost:3000";
 
   const onSearch = async (query) => {
@@ -31,8 +30,16 @@ const Home = () => {
     setSuggestMeals(data.meals);
   };
 
+  const loadFavorites = () => {
+    let favoriteLocalStorage = localStorage.getItem("favorites");
+    if (favoriteLocalStorage) {
+      setFavorites(JSON.parse(favoriteLocalStorage));
+    }
+  };
+
   useEffect(() => {
     onSearch("");
+    loadFavorites();
   }, []);
 
   return (
@@ -41,17 +48,18 @@ const Home = () => {
         background:
           'linear-gradient(180deg, hsla(0, 0%, 100%, 0.7), hsla(0, 0%, 100%, 0.7)),url("/onboarding-bg.svg")',
       }}
-      className="h-[90vh] "
+      className="min-h-[90vh] "
     >
       <SearchBar
         onSearch={onSearch}
         suggestMeals={suggestMeals}
         onSearchFirstLetter={onSearchFirstLetter}
       ></SearchBar>
-      <CategoriesList></CategoriesList>
-      <RecipeList meals={meals}></RecipeList>
-      {selectedRecipe && <RecipeDetails recipe={selectedRecipe} />}
-      <Footer></Footer>
+      <RecipeList
+        meals={meals}
+        loadFavorites={loadFavorites}
+        favorites={favorites}
+      ></RecipeList>
     </div>
   );
 };

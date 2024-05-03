@@ -2,7 +2,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
-function RecipeCard({ meal }) {
+function RecipeCard({ meal, loadFavorites, favorites }) {
   const computeIngredient = () => {
     const ingredients = [];
     for (const key in meal) {
@@ -15,9 +15,27 @@ function RecipeCard({ meal }) {
     }
     return ingredients;
   };
+  const toggleFavorite = (mealID, data) => {
+    let favorites = localStorage.getItem("favorites");
+    if (!favorites) {
+      localStorage.setItem("favorites", JSON.stringify({}));
+      favorites = {};
+    } else {
+      favorites = JSON.parse(localStorage.getItem("favorites"));
+    }
+    console.log("wo");
+    if (favorites[mealID]) {
+      favorites[mealID] = null;
+    } else {
+      favorites[mealID] = data;
+    }
+    localStorage.setItem("favorites", JSON.stringify(favorites));
+    loadFavorites();
+  };
+
   return (
     <div className="max-w-sm bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
-      <div className="h-64 w-full">
+      <div className="h-64 w-full min-w-72">
         <img
           className="rounded-t-lg h-full w-full"
           src={meal.strMealThumb}
@@ -26,11 +44,14 @@ function RecipeCard({ meal }) {
       </div>
 
       <div className="p-5">
-        <a href="#">
-          <h5 className="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white flex flex-wrap">
-            {meal.strMeal}
+        <Link>
+          <h5 className="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white flex flex-wrap justify-between">
+            <span>{meal.strMeal}</span>{" "}
+            <span onClick={() => toggleFavorite(meal.idMeal, meal)}>
+              {favorites[meal.idMeal] == null ? "🤍" : "❤️"}
+            </span>
           </h5>
-        </a>
+        </Link>
         <p className="flex flex-wrap justify-start max-h-14 overflow-hidden">
           {computeIngredient().map((ingredient) => (
             <span

@@ -5,7 +5,6 @@ import {
   FavoriteRecipes,
   FilterOptions,
   Header,
-  RecipeDetails,
   RecipeList,
   SearchBar,
   ShoppingList,
@@ -13,7 +12,7 @@ import {
   Footer,
 } from "./components";
 
-import { Home, About, FavoriteMeals, MealInfo } from "./pages";
+import { Home, About, FavoriteMeals, MealInfo, FiltersPage } from "./pages";
 
 function App() {
   return (
@@ -25,7 +24,9 @@ function App() {
           <Route path="/about" element={<About />} />
           <Route path="/favorites" element={<FavoriteMeals />} />
           <Route path="/mealinfo/:id" element={<MealInfo />} />
+          <Route path="/filters" element={<FiltersPage />} />
         </Routes>
+        <Footer></Footer>
       </div>
     </Router>
   );
