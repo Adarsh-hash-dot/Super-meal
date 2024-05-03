@@ -1,11 +1,32 @@
 import "./App.css";
-import { Button } from "flowbite-react";
+
+import { Route, BrowserRouter as Router, Routes } from "react-router-dom";
+import {
+  FavoriteRecipes,
+  FilterOptions,
+  Header,
+  RecipeDetails,
+  RecipeList,
+  SearchBar,
+  ShoppingList,
+  CategoriesList,
+  Footer,
+} from "./components";
+
+import { Home, About, FavoriteMeals } from "./pages";
 
 function App() {
   return (
-    <>
-      <Button>Click me</Button>
-    </>
+    <Router>
+      <div className="App">
+        <Header></Header>
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/about" element={<About />} />
+          <Route path="/favorites" element={<FavoriteMeals />} />
+        </Routes>
+      </div>
+    </Router>
   );
 }
 
