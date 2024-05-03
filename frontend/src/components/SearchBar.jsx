@@ -94,7 +94,7 @@ function SearchBar({ onSearch, onSearchFirstLetter, suggestMeals }) {
                   key={meal.idMeal}
                   className="w-100 p-1 border-b-yellow-500 border-solid border-2"
                 >
-                  <Link to={`/mealinfo?id=${meal.idMeal}`}>
+                  <Link to={`/mealinfo/${meal.idMeal}`}>
                     {" "}
                     <div>{meal.strMeal}</div>
                   </Link>

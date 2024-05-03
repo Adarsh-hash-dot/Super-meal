@@ -45,7 +45,7 @@ function RecipeCard({ meal }) {
           {meal.strInstructions}
         </p>
         <Link
-          to={`/mealinfo?id=${meal.idMeal}`}
+          to={`/mealinfo/${meal.idMeal}`}
           className="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white bg-yellow-700 rounded-lg hover:bg-yellow-800 focus:ring-4 focus:outline-none focus:ring-yellow-300 dark:bg-yellow-600 dark:hover:bg-yellow-700 dark:focus:ring-yellow-800"
         >
           Read more

@@ -8,6 +8,7 @@ import ShoppingList from "./ShoppingList";
 import CategoriesList from "./CategoriesList";
 import RecipeCard from "./RecipeCard";
 import Footer from "./Footer";
+import ResponsiveYouTubeEmbed from "./ResponsiveYouTubeEmbed";
 
 export {
   FavoriteRecipes,
@@ -20,4 +21,5 @@ export {
   CategoriesList,
   RecipeCard,
   Footer,
+  ResponsiveYouTubeEmbed,
 };
