@@ -1,7 +1,7 @@
 import React from "react";
 
 const MealInfo = () => {
-  return <div>MealInfo</div>;
+  return <div className="grid place-items-center">MealInfo</div>;
 };
 
 export default MealInfo;
