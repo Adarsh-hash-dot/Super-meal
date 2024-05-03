@@ -127,7 +127,12 @@ function MealInfoPage() {
                   }
                   return null;
                 })}
+                <p>
+                  {" "}
+                  ** Copy the above ingredients to have a Shopping list. **
+                </p>
               </ul>
+
               {/* Source */}
               <p className="text-sm text-gray-500 italic mb-4">
                 Source:
