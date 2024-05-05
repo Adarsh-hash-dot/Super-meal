@@ -13,7 +13,7 @@ const Home = () => {
   const [meals, setMeals] = useState(null);
   const [suggestMeals, setSuggestMeals] = useState(null);
   const [favorites, setFavorites] = useState({});
-  const BaseURL = "http://localhost:3000";
+  const BaseURL = import.meta.env.VITE_BASE_URL || "http://localhost:3000";
 
   const onSearch = async (query) => {
     const data = await fetch(`${BaseURL}/search?s=${query}`)

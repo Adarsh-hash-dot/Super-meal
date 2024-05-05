@@ -1,5 +1,6 @@
-const flowbite = require("flowbite-react/tailwind");
+import * as flowbite from "flowbite-react/tailwind";
 
+// eslint-disable-next-line no-undef
 module.exports = {
   content: [
     "./src/**/*.{js,jsx,ts,tsx}",

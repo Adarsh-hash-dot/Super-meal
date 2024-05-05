@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { CategoriesList, FilterRecipeCard } from "../components";
 
 const FiltersPage = () => {
-  const BaseURL = "http://localhost:3000";
+  const BaseURL = import.meta.env.VITE_BASE_URL || "http://localhost:3000";
   const [categories, setCategories] = useState([]);
   const [areas, setAreas] = useState([]);
   const [ingredients, setIngredients] = useState([]);

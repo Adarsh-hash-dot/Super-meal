@@ -5,7 +5,7 @@ import { useParams, Link } from "react-router-dom";
 function MealInfoPage() {
   const [mealData, setMealData] = useState(null);
   const [favorites, setFavorites] = useState({});
-  const BASE_URL = "http://localhost:3000";
+  const BASE_URL = import.meta.env.VITE_BASE_URL || "http://localhost:3000";
   const { id } = useParams();
 
   const fetchDetails = async () => {
